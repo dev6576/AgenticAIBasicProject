@@ -1,0 +1,40 @@
+# Python-related files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+
+# Virtual environment
+venv/
+env/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Test coverage reports
+.coverage
+*.cover
+*.coverage.*
+
+# Node.js dependencies (if applicable)
+node_modules/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore large files or sensitive data
+*.key
+*.pem
+*.crt
