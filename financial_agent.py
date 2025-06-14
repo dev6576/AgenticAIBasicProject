@@ -3,6 +3,7 @@ from phi.model.groq import Groq
 from phi.tools.yfinance import YFinanceTools
 from phi.tools.duckduckgo import DuckDuckGo
 import os
+import threading
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -37,4 +38,20 @@ multi_ai_agent=Agent(
     markdown=True,
 )
 
-multi_ai_agent.print_response("Summarise analyst recommendation and share the latest news for Apple Inc. (AAPL)", stream=True)
+def analyze_stock(ticker: str):
+    prompt = f"Summarise analyst recommendation and share the latest news for {ticker}"
+    result = multi_ai_agent.get_response(prompt)  # don't stream in background tasks
+    return result
+
+
+def background_analysis(ticker):
+    analysis = analyze_stock(ticker)
+    # Update the grid or store in a shared data structure
+    print(f"{ticker} analysis:\n{analysis}")
+    
+def start_analysis_for_all(ticker_list):
+    for ticker in ticker_list:
+        thread = threading.Thread(target=background_analysis, args=(ticker,))
+        thread.start()
+
+
